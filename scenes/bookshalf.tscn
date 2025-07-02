@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dylfmeghmwp8o"]
+
+[ext_resource type="Texture2D" uid="uid://wevhfnk7li34" path="res://assert/Screenshot 2025-06-25 091128.png" id="1_7o1o2"]
+
+[node name="BookShalf" type="Sprite2D"]
+position = Vector2(-1, -1)
+scale = Vector2(0.276205, 0.276205)
+texture = ExtResource("1_7o1o2")
