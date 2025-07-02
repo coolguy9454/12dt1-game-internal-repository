@@ -2,7 +2,9 @@ extends CharacterBody2D
 
 @onready var player = $/root/Game/Player
 @onready var game = $/root/Game
+@onready var flash_animation: AnimationPlayer = $AnimatedSprite2D/FlashAnimation
 
+var explosion_scene = preload("res://scenes/explosion.tscn")
 var enemy_health: int = 5
 var score: int = 0
 const SPEED = 60
