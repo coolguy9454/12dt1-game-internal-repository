@@ -13,7 +13,6 @@ const SPEED = 60
 func _ready() -> void:
 	pass # Replace with function body.
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	velocity = (player.global_position - global_position).normalized() * SPEED
@@ -41,5 +40,5 @@ func hit():
 		$/root/Game.add_child(explosion)
 		queue_free()
 		
-		player.increase_score()
+		game.increase_score()
 		

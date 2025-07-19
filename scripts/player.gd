@@ -3,17 +3,19 @@ extends CharacterBody2D
 var bullet_scene = preload("res://scenes/bullet.tscn")
 const SPEED = 300
 var can_shoot: bool = true
-var player_health: int = 5
+var player_health: int = 98
 var score: int = 0
 
 @onready var shooting_part = $ShootingPart
+@onready var game = $/root/Game
 @onready var is_reloading = false
 
-@export var ui: Node
+@export var health_ui: Node
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -23,6 +25,8 @@ func _physics_process(delta: float) -> void:
 	velocity.x = Input.get_axis("left", "right") * SPEED
 	velocity.y = Input.get_axis("up", "down") * SPEED
 	velocity = lerp(get_real_velocity(), velocity, 0.1)
+	
+	health_ui.rotation = -rotation
 	
 	if can_shoot:
 		var bullet = bullet_scene.instantiate()
@@ -40,17 +44,14 @@ func _physics_process(delta: float) -> void:
 		var collision = get_slide_collision(i)
 		
 		if collision.get_collider().is_in_group("enemies"):
-			player_health -= 1
+			player_health -= 2
+			health_ui.value = player_health
 			
 			if player_health <= 0 and not is_reloading:
 				is_reloading = true
-				get_tree().reload_current_scene()
+				get_tree().change_scene_to_file("res://scenes/dead screen.tscn")
 
 
 func _bullet_cooldown() -> void:
 	can_shoot = true
 	
-
-func increase_score():
-	score += 1
-	ui.value = score

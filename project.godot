@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Top-down-shooter(internal)"
+run/main_scene="uid://c56javyd1q6yy"
 config/features=PackedStringArray("4.4", "Forward Plus")
 
 [display]
@@ -47,6 +48,6 @@ right={
 [rendering]
 
 anti_aliasing/quality/msaa_2d=2
-environment/defaults/default_clear_color=Color(0, 0, 0, 1)
+environment/defaults/default_clear_color=Color(0.245984, 0.245984, 0.245984, 1)
 environment/quality/msaa_2d=0
 environment/stretch/mode="disabled"

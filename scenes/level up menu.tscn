@@ -1,0 +1,61 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbmver0ijwwvx"]
+
+[ext_resource type="Script" uid="uid://c3aianj30e4kk" path="res://scripts/level_up_menu.gd" id="1_2v68v"]
+
+[node name="LevelUpMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(577, 339)
+script = ExtResource("1_2v68v")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 334.0
+offset_top = 86.0
+offset_right = 808.0
+offset_bottom = 548.0
+pivot_offset = Vector2(241, 246)
+color = Color(1, 0.635294, 0.278431, 1)
+
+[node name="Upgrade1" type="Button" parent="."]
+layout_mode = 0
+offset_left = 402.0
+offset_top = 194.0
+offset_right = 729.0
+offset_bottom = 287.0
+pivot_offset = Vector2(173, 52)
+
+[node name="Upgrade2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 403.0
+offset_top = 309.0
+offset_right = 731.0
+offset_bottom = 402.0
+
+[node name="Upgrade3" type="Button" parent="."]
+layout_mode = 0
+offset_left = 403.0
+offset_top = 427.0
+offset_right = 732.0
+offset_bottom = 520.0
+pivot_offset = Vector2(166, 50)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 465.0
+offset_top = 118.0
+offset_right = 682.0
+offset_bottom = 173.0
+pivot_offset = Vector2(98, 30)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "LEVEL UP!"
+
+[connection signal="pressed" from="Upgrade1" to="." method="_on_upgrade_1_pressed"]
+[connection signal="pressed" from="Upgrade2" to="." method="_on_upgrade_2_pressed"]
+[connection signal="pressed" from="Upgrade3" to="." method="_on_upgrade_3_pressed"]
