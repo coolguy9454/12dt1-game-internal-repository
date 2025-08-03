@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bo4avh8f1hfb8"]
+
+[ext_resource type="Texture2D" uid="uid://bciysrlwm86m" path="res://assert/gems(blue).png" id="1_pdbkl"]
+[ext_resource type="Script" uid="uid://inelnaxlcaof" path="res://scripts/blue_gems.gd" id="1_qm4kp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tjoev"]
+size = Vector2(32, 50.75)
+
+[node name="BlueGems" type="Area2D"]
+script = ExtResource("1_qm4kp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.625)
+shape = SubResource("RectangleShape2D_tjoev")
+
+[node name="BlueGemsTexture" type="Sprite2D" parent="."]
+position = Vector2(0, 1.42109e-14)
+scale = Vector2(0.165865, 0.165865)
+texture = ExtResource("1_pdbkl")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
