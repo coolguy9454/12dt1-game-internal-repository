@@ -9,6 +9,7 @@ emitting = false
 amount = 50
 lifetime = 0.2
 one_shot = true
+speed_scale = 2.0
 explosiveness = 0.77
 spread = 180.0
 gravity = Vector2(0, 0)

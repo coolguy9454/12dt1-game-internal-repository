@@ -1,0 +1,93 @@
+[gd_scene load_steps=12 format=3 uid="uid://ccnhr4pmngs5k"]
+
+[ext_resource type="Shader" uid="uid://bvpfip2th6e85" path="res://assert/flash_hit.tres" id="1_6mw1b"]
+[ext_resource type="Script" uid="uid://cpetlke7ds8qt" path="res://scripts/skull.gd" id="1_8axce"]
+[ext_resource type="Texture2D" uid="uid://cdoddotpr3i2m" path="res://assert/skull sprite animation-01.png" id="2_8axce"]
+[ext_resource type="Texture2D" uid="uid://goh6hfmosg2s" path="res://assert/skull sprite animation-03.png" id="3_w7rgt"]
+[ext_resource type="Texture2D" uid="uid://dvhojxopp23if" path="res://assert/skull sprite animation-02.png" id="4_mfoix"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8axce"]
+radius = 30.57
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8emal"]
+resource_local_to_scene = true
+shader = ExtResource("1_6mw1b")
+shader_parameter/enabled = false
+shader_parameter/tint = Color(1, 1, 1, 1)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mferh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_8axce")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_w7rgt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_mfoix")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_w7rgt")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_yx7ku"]
+resource_name = "Flash"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_6mw1b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n2wha"]
+_data = {
+&"Flash": SubResource("Animation_yx7ku"),
+&"RESET": SubResource("Animation_6mw1b")
+}
+
+[node name="skull" type="CharacterBody2D" groups=["enemies", "skulls"]]
+safe_margin = 1.0
+script = ExtResource("1_8axce")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, 6)
+shape = SubResource("CircleShape2D_8axce")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_8emal")
+scale = Vector2(0.0338825, 0.0338825)
+sprite_frames = SubResource("SpriteFrames_mferh")
+animation = &"walk"
+frame_progress = 0.626212
+
+[node name="FlashAnimation" type="AnimationPlayer" parent="AnimatedSprite2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_n2wha")
+}

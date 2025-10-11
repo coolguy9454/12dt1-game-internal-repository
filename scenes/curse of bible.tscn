@@ -1,0 +1,74 @@
+[gd_scene load_steps=14 format=3 uid="uid://8gv4iieubpes"]
+
+[ext_resource type="Script" uid="uid://dhur6lrkqmhtd" path="res://scripts/curse_of_bible.gd" id="1_jo5b5"]
+[ext_resource type="Texture2D" uid="uid://dbk5h4iblr5ys" path="res://assert/curse of bible book-04.png" id="2_quill"]
+[ext_resource type="Texture2D" uid="uid://dogpelksubo1p" path="res://assert/curse of bible book-06.png" id="3_d1cit"]
+[ext_resource type="Texture2D" uid="uid://booqqs3xg00ls" path="res://assert/curse of bible arm-01.png" id="4_h7oio"]
+[ext_resource type="Texture2D" uid="uid://bteeblw5a76n0" path="res://assert/curse of bible arm-02.png" id="5_ljx5o"]
+[ext_resource type="Texture2D" uid="uid://c23muvc7d60i4" path="res://assert/curse of bible arm-03.png" id="6_nwmvu"]
+[ext_resource type="Texture2D" uid="uid://bcegl4hg613hi" path="res://assert/curse of bible arm-04.png" id="7_qygmt"]
+[ext_resource type="Texture2D" uid="uid://5xhmvjdp8kvq" path="res://assert/curse of bible arm-05.png" id="8_ekkt2"]
+[ext_resource type="Texture2D" uid="uid://dpq734ffoyxmo" path="res://assert/curse of bible arm-06.png" id="9_44aix"]
+[ext_resource type="Texture2D" uid="uid://b574r804bgpn2" path="res://assert/curse of bible arm-07.png" id="10_c1r5k"]
+[ext_resource type="Texture2D" uid="uid://dd64juo32q5n1" path="res://assert/curse of bible book-05.png" id="11_2um2n"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ewg02"]
+radius = 98.6154
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mld4v"]
+animations = [{
+"frames": [{
+"duration": 5.0,
+"texture": ExtResource("2_quill")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_2um2n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_d1cit")
+}, {
+"duration": 0.5,
+"texture": ExtResource("4_h7oio")
+}, {
+"duration": 0.5,
+"texture": ExtResource("5_ljx5o")
+}, {
+"duration": 2.0,
+"texture": ExtResource("6_nwmvu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_qygmt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ekkt2")
+}, {
+"duration": 0.5,
+"texture": ExtResource("9_44aix")
+}, {
+"duration": 0.5,
+"texture": ExtResource("10_c1r5k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_2um2n")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}]
+
+[node name="CurseOfBible" type="Area2D"]
+script = ExtResource("1_jo5b5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-68, 25)
+shape = SubResource("CircleShape2D_ewg02")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -94)
+scale = Vector2(0.096443, 0.096443)
+sprite_frames = SubResource("SpriteFrames_mld4v")
+animation = &"attack"
+frame_progress = 0.0732427
+offset = Vector2(-39.3275, 57.9221)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

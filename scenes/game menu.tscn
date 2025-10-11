@@ -1,6 +1,47 @@
-[gd_scene load_steps=2 format=3 uid="uid://c56javyd1q6yy"]
+[gd_scene load_steps=12 format=3 uid="uid://c56javyd1q6yy"]
 
 [ext_resource type="Script" uid="uid://b743uq5x6btua" path="res://scripts/game_menu.gd" id="1_bj6xj"]
+[ext_resource type="Texture2D" uid="uid://d2qcdwbhfex38" path="res://assert/main menu background.png" id="2_uygec"]
+[ext_resource type="Texture2D" uid="uid://crgxgcgkktn5e" path="res://assert/main menu background open.png" id="3_q6a72"]
+[ext_resource type="Texture2D" uid="uid://b0o44qp3wlrmu" path="res://assert/main menu closing in.png" id="4_hv34k"]
+[ext_resource type="Texture2D" uid="uid://cpnrf6s8hld7u" path="res://assert/main menu closing in 2.png" id="5_o2wsj"]
+[ext_resource type="Texture2D" uid="uid://4k4as8auodtp" path="res://assert/main menu closing in 3.png" id="6_3w720"]
+[ext_resource type="Texture2D" uid="uid://d1wyf832ls4rk" path="res://assert/main menu closing in 4.png" id="7_y8sis"]
+[ext_resource type="Texture2D" uid="uid://b7ioye82d8y4t" path="res://assert/main menu closing in 5.png" id="8_3w720"]
+[ext_resource type="Texture2D" uid="uid://ttwodhfkolwi" path="res://assert/Screenshot 2025-08-28 130000.png" id="9_y8sis"]
+[ext_resource type="FontFile" uid="uid://rvbi0c82jvgo" path="res://assert/PixelatedEleganceRegular-ovyAA.ttf" id="10_y8sis"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_148el"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_uygec")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_q6a72")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_hv34k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_o2wsj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_3w720")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_y8sis")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_3w720")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_y8sis")
+}],
+"loop": false,
+"name": &"door opening",
+"speed": 5.0
+}]
 
 [node name="GameMenu" type="Control"]
 layout_mode = 3
@@ -11,33 +52,54 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_bj6xj")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(575, 378)
+scale = Vector2(0.800049, 0.800049)
+sprite_frames = SubResource("SpriteFrames_148el")
+animation = &"door opening"
+
 [node name="Play" type="Button" parent="."]
 layout_mode = 2
 offset_left = -15.0
-offset_top = -13.0
+offset_top = -8.0
 offset_right = 1167.0
-offset_bottom = 880.0
+offset_bottom = 755.0
 pivot_offset = Vector2(-330, 520)
 theme_override_font_sizes/font_size = 20
-text = "TAP  ANYWHERE  TO  PLAY"
 flat = true
-
-[node name="Settings" type="Button" parent="."]
-layout_mode = 2
-offset_left = 996.0
-offset_top = 576.0
-offset_right = 1111.0
-offset_bottom = 620.0
-text = "Settings"
 
 [node name="Quit" type="Button" parent="."]
 layout_mode = 2
-offset_left = 29.0
-offset_top = 586.0
-offset_right = 118.0
-offset_bottom = 624.0
+offset_left = 45.0
+offset_top = 570.0
+offset_right = 134.0
+offset_bottom = 608.0
+theme_override_fonts/font = ExtResource("10_y8sis")
 text = "Quit"
 
+[node name="Settings" type="Button" parent="."]
+layout_mode = 2
+offset_left = 1003.0
+offset_top = 562.0
+offset_right = 1118.0
+offset_bottom = 606.0
+theme_override_fonts/font = ExtResource("10_y8sis")
+text = "Settings"
+
+[node name="ClickToPlay" type="Label" parent="."]
+layout_mode = 0
+offset_left = 398.0
+offset_top = 507.0
+offset_right = 770.0
+offset_bottom = 596.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("10_y8sis")
+theme_override_font_sizes/font_size = 15
+text = "TAP   ANYWHERE   TO   PLAY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Settings" to="." method="_on_settings_pressed"]

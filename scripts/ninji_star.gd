@@ -1,7 +1,9 @@
 extends Area2D
 
+@export var animated_sprite_2d: AnimatedSprite2D
+@onready var ninji_star_speed = $/root/Game/CanvasLayer/NinjiStarSpeed
+
 var direction: Vector2
-const SPEED = 10
 
 
 # Called when the node enters the scene tree for the first time.
@@ -11,7 +13,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	global_position += direction * SPEED
+	animated_sprite_2d.play("spin")
+	
+	global_position += direction * int(ninji_star_speed.text)
 
 
 func _on_timer_timeout() -> void:

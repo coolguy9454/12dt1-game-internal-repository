@@ -1,11 +1,12 @@
 extends CharacterBody2D
 
 
-var bullet_scene = preload("res://scenes/bullet.tscn")
+var ninji_star_scene = preload("res://scenes/ninji star.tscn")
 var shield_scene = preload("res://scenes/shield.tscn")
+var curse_of_bible_scene = preload("res://scenes/curse of bible.tscn")
 
 
-var speed = 300
+var speed = 200
 var can_shoot: bool = true
 var player_health: int = 1950
 var score: int = 0
@@ -17,6 +18,7 @@ var enemy_damage: float = 1.0
 @onready var player = $Polygon2D
 @onready var path_2d = $Path2D
 @onready var timer = $Timer
+@onready var animatedsprite_2d = $AnimatedSprite2D
 
 @export var health_ui: Node
 
@@ -24,29 +26,39 @@ var enemy_damage: float = 1.0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	health_ui.z_index = 100
-	player.z_index = 98
-
+	animatedsprite_2d.z_index = 98
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	look_at(get_global_mouse_position())
 	
-	velocity.x = Input.get_axis("left", "right") * speed
-	velocity.y = Input.get_axis("up", "down") * speed
-	velocity = lerp(get_real_velocity(), velocity, 0.1)
 	
-	health_ui.rotation = -rotation
-	path_2d.rotation = -rotation
-
+	shooting_part.look_at(get_global_mouse_position())
+	
+	var v_direction: float = Input.get_axis("up", "down")
+	var h_direction: float = Input.get_axis("left", "right")
+	
+	var direction: Vector2 = Vector2(h_direction, v_direction).normalized()
+	
+	velocity = direction * speed
+	
+	if velocity.x < 0:
+		animatedsprite_2d.flip_h = true
+		animatedsprite_2d.play("walk")
+	elif velocity.x > 0:
+		animatedsprite_2d.flip_h = false
+		animatedsprite_2d.play("walk")
+	else:
+		animatedsprite_2d.play("idle")
 
 	if can_shoot:
-		var bullet = bullet_scene.instantiate()
-		bullet.global_position = shooting_part.global_position
-		bullet.direction = (get_global_mouse_position() - global_position).normalized()
+		var ninji_star = ninji_star_scene.instantiate()
+		ninji_star.global_position = shooting_part.global_position
+		ninji_star.direction = (get_global_mouse_position() - global_position).normalized()
 		can_shoot = false
-		$Timer.start()
+		timer.start()
 		
-		game.add_child(bullet)
+		game.add_child(ninji_star)
 	
 	move_and_slide()
 	
@@ -55,6 +67,7 @@ func _physics_process(delta: float) -> void:
 		var collision = get_slide_collision(i)
 		
 		if collision.get_collider().is_in_group("enemies"):
+			# In body, take damage = true, else false
 			player_health -= enemy_damage
 			health_ui.value = player_health
 			
@@ -76,13 +89,15 @@ func increase_max_health():
 	health_ui.value += 10
 	print(health_ui.max_value)
 	
-func increase_bullet_speed():
-	timer.wait_time -= 0.05
+func decrease_ninji_star_cooldown():
+	timer.wait_time -= 0.1
 	print(timer.wait_time)
 	
 func deploy_shield():
 	var shield = shield_scene.instantiate()
 	game.add_child(shield)
-	$CollisionShape2D.shape.radius = 40
 	enemy_damage -= 0.2
 	
+func deploy_curse_of_bible():
+	var curse_of_bible = curse_of_bible_scene.instantiate()
+	game.add_child(curse_of_bible)

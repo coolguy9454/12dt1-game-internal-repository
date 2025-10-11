@@ -1,11 +1,38 @@
-[gd_scene load_steps=7 format=3 uid="uid://m1f8rhbp7yep"]
+[gd_scene load_steps=11 format=3 uid="uid://m1f8rhbp7yep"]
 
 [ext_resource type="Script" uid="uid://bmg7cj42wv5tc" path="res://scripts/player.gd" id="1_r2mmp"]
+[ext_resource type="Texture2D" uid="uid://dyvveip358ebq" path="res://assert/player sprite-01.png" id="2_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://clxy2miegx1va" path="res://assert/player sprite idle-03.png" id="2_qlg0r"]
+[ext_resource type="Texture2D" uid="uid://xq1r41wjhcwi" path="res://assert/player sprite-02.png" id="3_dqkch"]
+[ext_resource type="Texture2D" uid="uid://dfon4baugp18l" path="res://assert/player sprite idle-04.png" id="3_tuyoq"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3vyb7"]
+animations = [{
+"frames": [{
+"duration": 2.0,
+"texture": ExtResource("2_qlg0r")
+}, {
+"duration": 2.0,
+"texture": ExtResource("3_tuyoq")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.5,
+"texture": ExtResource("2_qhqgy")
+}, {
+"duration": 1.5,
+"texture": ExtResource("3_dqkch")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_h3ccb"]
-radius = 13.0384
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qlg0r"]
+size = Vector2(34, 41)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3vyb7"]
 bg_color = Color(0, 0, 0, 1)
@@ -23,28 +50,33 @@ _data = {
 }
 point_count = 5
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("health_ui")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("health_ui") groups=["player"]]
+safe_margin = 1.0
 script = ExtResource("1_r2mmp")
 health_ui = NodePath("Health")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-4.76837e-07, -4.76837e-07)
+scale = Vector2(0.0224456, 0.0224456)
 sprite_frames = SubResource("SpriteFrames_3vyb7")
+animation = &"idle"
+frame_progress = 0.627657
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
+visible = false
 position = Vector2(-9.53674e-07, 9.53674e-07)
 scale = Vector2(1.2495, 1.78231)
 color = Color(0.376471, 1, 1, 1)
 polygon = PackedVector2Array(-14.25, -10.73, 24, 0, -14, 11)
 
 [node name="ShootingPart" type="Node2D" parent="."]
-position = Vector2(29, 0)
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.4
+wait_time = 0.6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-4, 0)
-shape = SubResource("CircleShape2D_h3ccb")
+position = Vector2(-3, 11.5)
+shape = SubResource("RectangleShape2D_qlg0r")
 one_way_collision_margin = 0.0
 
 [node name="Camera2D" type="Camera2D" parent="."]

@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://by3gmmkicxtln"]
+
+[ext_resource type="Script" uid="uid://d3y42n0qpjtaf" path="res://scripts/ninji_star.gd" id="1_ytwwo"]
+[ext_resource type="Texture2D" uid="uid://cnlbx58h5wcc7" path="res://assert/ninji star-01.png" id="2_avy67"]
+[ext_resource type="Texture2D" uid="uid://bevihyimj4sdc" path="res://assert/ninji star-02.png" id="3_rcr2y"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u0gq6"]
+radius = 12.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qncy5"]
+animations = [{
+"frames": [{
+"duration": 0.7,
+"texture": ExtResource("2_avy67")
+}, {
+"duration": 0.7,
+"texture": ExtResource("3_rcr2y")
+}],
+"loop": true,
+"name": &"spin",
+"speed": 5.0
+}]
+
+[node name="NinjiStar" type="Area2D" node_paths=PackedStringArray("animated_sprite_2d")]
+script = ExtResource("1_ytwwo")
+animated_sprite_2d = NodePath("AnimatedSprite2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_u0gq6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.0121675, 0.0121675)
+sprite_frames = SubResource("SpriteFrames_qncy5")
+animation = &"spin"
+frame_progress = 0.0921888
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

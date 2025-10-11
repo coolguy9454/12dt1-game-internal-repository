@@ -13,7 +13,7 @@ script = ExtResource("1_ohv3a")
 shape = SubResource("CircleShape2D_ohv3a")
 
 [node name="ShieldTexture" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.513726)
+modulate = Color(1, 1, 1, 0.168627)
 position = Vector2(1, 2)
 scale = Vector2(0.181641, 0.181641)
 texture = ExtResource("1_vtru8")

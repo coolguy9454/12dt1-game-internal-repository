@@ -1,8 +1,6 @@
 extends Control
 
-
-func _on_volume_pressed() -> void:
-	pass # Replace with function body.
+@onready var game_music = $GameMusic
 
 
 func _on_back_pressed() -> void:

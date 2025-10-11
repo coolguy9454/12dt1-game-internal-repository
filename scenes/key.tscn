@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dj000agvj5ssv"]
+
+[ext_resource type="Texture2D" uid="uid://ckhrl2uke2ooe" path="res://assert/key.png" id="1_fttkb"]
+[ext_resource type="Script" uid="uid://bv2ld1cx2trpv" path="res://scripts/key.gd" id="2_wy8tx"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_brs3p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_fttkb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Key" type="AnimatedSprite2D"]
+position = Vector2(-74, 24)
+scale = Vector2(0.040687, 0.040687)
+sprite_frames = SubResource("SpriteFrames_brs3p")
+offset = Vector2(1843.34, -540.713)
+script = ExtResource("2_wy8tx")

@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://c53nyujrpxmao"]
+
+[ext_resource type="Texture2D" uid="uid://c301vxf1n4hjm" path="res://assert/direction arrow to left.png" id="1_hmohk"]
+[ext_resource type="Script" uid="uid://bpy04i205hkg2" path="res://scripts/direction_arrow.gd" id="1_xfx1g"]
+[ext_resource type="Texture2D" uid="uid://ciku0okb8fk5u" path="res://assert/direction arrow.png" id="2_xfx1g"]
+[ext_resource type="Texture2D" uid="uid://bpumsf2btf6kl" path="res://assert/direction arrow to right.png" id="3_2p5mh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ndn8r"]
+size = Vector2(43, 31)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iyy0r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_hmohk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_xfx1g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2p5mh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_xfx1g")
+}],
+"loop": true,
+"name": &"arrow animation",
+"speed": 4.0
+}]
+
+[node name="DirectionArrowRight" type="Area2D"]
+script = ExtResource("1_xfx1g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.5, 1.5)
+shape = SubResource("RectangleShape2D_ndn8r")
+
+[node name="AnimatedArrow" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -1)
+scale = Vector2(0.630435, 0.630435)
+sprite_frames = SubResource("SpriteFrames_iyy0r")
+animation = &"arrow animation"
+frame_progress = 0.941334

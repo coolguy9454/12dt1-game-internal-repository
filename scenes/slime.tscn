@@ -1,40 +1,39 @@
 [gd_scene load_steps=16 format=3 uid="uid://08e5bssfwdgm"]
 
-[ext_resource type="Script" uid="uid://dx5xpiaf887fg" path="res://scripts/enemy.gd" id="1_4ywxb"]
-[ext_resource type="Shader" uid="uid://bvpfip2th6e85" path="res://assert/flash_hit.tres" id="2_yodam"]
-[ext_resource type="Texture2D" uid="uid://doggjcg1nth1x" path="res://assert/slime animation grid.png" id="4_jaeni"]
+[ext_resource type="Script" uid="uid://dx5xpiaf887fg" path="res://scripts/slime.gd" id="1_n6pvg"]
+[ext_resource type="Shader" uid="uid://bvpfip2th6e85" path="res://assert/flash_hit.tres" id="2_pjw23"]
+[ext_resource type="Texture2D" uid="uid://doggjcg1nth1x" path="res://assert/slime animation grid.png" id="3_2npkn"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ra3w"]
-size = Vector2(41, 16)
+[sub_resource type="CircleShape2D" id="CircleShape2D_n6pvg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oymrb"]
 resource_local_to_scene = true
-shader = ExtResource("2_yodam")
+shader = ExtResource("2_pjw23")
 shader_parameter/enabled = false
 shader_parameter/tint = Color(1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4spp2"]
-atlas = ExtResource("4_jaeni")
+atlas = ExtResource("3_2npkn")
 region = Rect2(0, 77, 99, 77)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6yo87"]
-atlas = ExtResource("4_jaeni")
+atlas = ExtResource("3_2npkn")
 region = Rect2(99, 77, 99, 77)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pler8"]
-atlas = ExtResource("4_jaeni")
+atlas = ExtResource("3_2npkn")
 region = Rect2(693, 77, 99, 77)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fmta3"]
-atlas = ExtResource("4_jaeni")
+atlas = ExtResource("3_2npkn")
 region = Rect2(198, 77, 99, 77)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_70qfv"]
-atlas = ExtResource("4_jaeni")
+atlas = ExtResource("3_2npkn")
 region = Rect2(297, 77, 99, 77)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3wp2r"]
-atlas = ExtResource("4_jaeni")
+atlas = ExtResource("3_2npkn")
 region = Rect2(396, 77, 99, 77)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4pkso"]
@@ -100,12 +99,13 @@ _data = {
 &"RESET": SubResource("Animation_st3nv")
 }
 
-[node name="Enemy" type="CharacterBody2D" groups=["enemies"]]
-script = ExtResource("1_4ywxb")
+[node name="slime" type="CharacterBody2D" groups=["enemies", "slimes"]]
+safe_margin = 1.0
+script = ExtResource("1_n6pvg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 2)
-shape = SubResource("RectangleShape2D_4ra3w")
+shape = SubResource("CircleShape2D_n6pvg")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_oymrb")

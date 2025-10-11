@@ -1,0 +1,83 @@
+[gd_scene load_steps=11 format=3 uid="uid://4crp0k13j0g8"]
+
+[ext_resource type="Script" uid="uid://cyoelfcgl4gtw" path="res://scripts/chest.gd" id="1_gqd3d"]
+[ext_resource type="Texture2D" uid="uid://balme1mwx0ed6" path="res://assert/chest close.png" id="1_sy5e1"]
+[ext_resource type="Texture2D" uid="uid://c17uc1you0ext" path="res://assert/chest open.png" id="2_gqd3d"]
+[ext_resource type="Texture2D" uid="uid://by68co7dygbqs" path="res://assert/speech label 'E'.png" id="4_yhylo"]
+[ext_resource type="Texture2D" uid="uid://b0xxw5u1rkcvu" path="res://assert/speech label 'E'-01.png" id="5_w02o5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yhylo"]
+radius = 40.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gqd3d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_sy5e1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_gqd3d")
+}],
+"loop": false,
+"name": &"open",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yhylo"]
+animations = [{
+"frames": [{
+"duration": 3.0,
+"texture": ExtResource("5_w02o5")
+}, {
+"duration": 3.0,
+"texture": ExtResource("4_yhylo")
+}],
+"loop": true,
+"name": &"float",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sy5e1"]
+radius = 79.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yhylo"]
+size = Vector2(767, 655)
+
+[node name="Chest" type="StaticBody2D"]
+script = ExtResource("1_gqd3d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+shape = SubResource("CircleShape2D_yhylo")
+
+[node name="ChestAnimation" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, -10)
+scale = Vector2(0.219072, 0.219072)
+sprite_frames = SubResource("SpriteFrames_gqd3d")
+animation = &"open"
+frame_progress = 0.821831
+
+[node name="LabelAnimation" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(-25, -57)
+scale = Vector2(0.08661, 0.08661)
+sprite_frames = SubResource("SpriteFrames_yhylo")
+animation = &"float"
+frame_progress = 0.0533819
+
+[node name="PlayerDetection" type="Area2D" parent="."]
+
+[node name="PlayerSensor" type="CollisionShape2D" parent="PlayerDetection"]
+position = Vector2(1, 5)
+shape = SubResource("CircleShape2D_sy5e1")
+
+[node name="WithinSeenArea" type="Area2D" parent="."]
+
+[node name="PlayerSensor2" type="CollisionShape2D" parent="WithinSeenArea"]
+position = Vector2(-185.5, -11.5)
+shape = SubResource("RectangleShape2D_yhylo")
+
+[connection signal="body_entered" from="PlayerDetection" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="PlayerDetection" to="." method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="WithinSeenArea" to="." method="_on_within_seen_area_body_entered"]
+[connection signal="body_exited" from="WithinSeenArea" to="." method="_on_within_seen_area_body_exited"]

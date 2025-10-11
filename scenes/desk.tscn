@@ -1,11 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://caq0kiysrktn5"]
+[gd_scene load_steps=3 format=3 uid="uid://caq0kiysrktn5"]
+
+[ext_resource type="Texture2D" uid="uid://bcw2ag2xhboyk" path="res://assert/library table.png" id="1_0iqh6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_88002"]
-size = Vector2(105.75, 60)
+size = Vector2(128, 80)
 
 [node name="StaticBody2D" type="StaticBody2D"]
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 offset_left = -53.0
 offset_top = -30.0
 offset_right = 53.0
@@ -13,5 +16,10 @@ offset_bottom = 30.0
 color = Color(0.580392, 0.298039, 0, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.125, 0)
+position = Vector2(-2, -2)
 shape = SubResource("RectangleShape2D_88002")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-9.53674e-07, 4.76837e-07)
+scale = Vector2(1.0732, 0.96371)
+texture = ExtResource("1_0iqh6")

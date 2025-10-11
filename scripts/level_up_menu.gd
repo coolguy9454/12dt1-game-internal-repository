@@ -5,14 +5,15 @@ extends Control
 @onready var upgrade_3 = $Upgrade3
 @onready var game = $/root/Game
 @onready var player = $/root/Game/Player
+@onready var ninji_star = $/root/Game/NinjiStar
 
-var enemy_scene = preload("res://scenes/enemy.tscn")
-var enemy = enemy_scene.instantiate()
+var slime_scene = preload("res://scenes/slime.tscn")
+var slime = slime_scene.instantiate()
 
 var button_pressed: String = ""
 
-var all_skills = ["Speed Boost", "Increase Max Health +10", "Shield", "Normal Attack Damage +1", "Normal Attack Speed +1"]
-#var all_skills = ["Speed Boost", "Increase Max Health +10", "Shield"]
+var all_skills = ["Speed Boost", "Increase Max Health +10", "Shield", "Normal Attack Damage +2", "Normal Attack Speed +2", "Curse Of Bible"]
+# var all_skills = ["Speed Boost", "Curse Of Bible", "Shield"]
 
 func get_three_unique_skills():
 	var shuffled = all_skills.duplicate()
@@ -61,10 +62,19 @@ func level_up():
 		player.deploy_shield()
 		print(button_pressed)
 		
-	elif button_pressed == "Normal Attack Damage +1":
-		game.increase_bullet_damage()
+	elif button_pressed == "Normal Attack Damage +2":
+		game.increase_ninji_star_damage()
 		print(button_pressed)
 		
-	elif button_pressed == "Normal Attack Speed +1":
-		player.increase_bullet_speed()
+	elif button_pressed == "Normal Attack Speed +2":
+		player.decrease_ninji_star_cooldown()
+		game.increase_ninji_star_speed()
+		print(button_pressed)	
+		
+	elif button_pressed == "Curse Of Bible":
+		player.deploy_curse_of_bible()
+		print(button_pressed)
+		
+		all_skills.erase("Curse Of Bible")
+		print(all_skills)
 	
