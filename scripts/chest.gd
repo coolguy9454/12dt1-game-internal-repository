@@ -14,11 +14,17 @@ var key_scene = preload("res://scenes/key.tscn")
 
 var near_chest: bool = false
 
+const top_layer = 100
+const player = "player"
+const chest_animation_name = "open"
+const label_animation_name = "float"
+const interact_button = "interact"
+
 
 func _process(delta):
 	if near_chest:
-		if Input.is_action_just_pressed("interact"):
-			chest_animation.play("open")
+		if Input.is_action_just_pressed(interact_button):
+			chest_animation.play(chest_animation_name)
 			
 			player_detection.queue_free()
 			within_seen_area.queue_free()
@@ -34,16 +40,16 @@ func _process(delta):
 		
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player"):
+	if body.is_in_group(player):
 		label_animation.show()
-		label_animation.play("float")
-		label_animation.z_index = 100
+		label_animation.play(label_animation_name)
+		label_animation.z_index = top_layer
 		
 		near_chest = true
 	
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
-	if body.is_in_group("player"):
+	if body.is_in_group(player):
 		label_animation.hide()
 		label_animation.stop()
 		
@@ -51,12 +57,12 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 		
 
 func _on_within_seen_area_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player"):
+	if body.is_in_group(player):
 		direction_arrow_right.hide()
 
 
 func _on_within_seen_area_body_exited(body: Node2D) -> void:
-	if body.is_in_group("player"):
+	if body.is_in_group(player):
 		direction_arrow_right.show()
 		
 	

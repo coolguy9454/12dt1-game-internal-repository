@@ -21,9 +21,9 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="NinjiStar" type="Area2D" node_paths=PackedStringArray("animated_sprite_2d")]
+[node name="NinjiStar" type="Area2D" node_paths=PackedStringArray("ninji_star_animation")]
 script = ExtResource("1_ytwwo")
-animated_sprite_2d = NodePath("AnimatedSprite2D")
+ninji_star_animation = NodePath("AnimatedSprite2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_u0gq6")

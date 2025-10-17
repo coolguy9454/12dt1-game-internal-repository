@@ -1,6 +1,8 @@
 extends AnimatedSprite2D
 	
+const achievement_animation = "slide"
+
 
 func play_animation():
 	# Play achievement's aniamtion
-	play("slide")
+	play(achievement_animation)
