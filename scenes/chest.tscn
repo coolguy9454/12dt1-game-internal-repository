@@ -44,6 +44,7 @@ radius = 79.0
 size = Vector2(767, 655)
 
 [node name="Chest" type="StaticBody2D"]
+collision_layer = 3
 script = ExtResource("1_gqd3d")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

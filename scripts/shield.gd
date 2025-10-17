@@ -4,12 +4,8 @@ extends Area2D
 
 
 func _physics_process(delta: float) -> void:
+	# Follow player
 	global_position = player.global_position
 	
+	# Higher layer than enemies, player, bookshalf, desk, and more
 	z_index = 99
-	
-
-
-
-func _on_area_entered(area: Area2D) -> void:
-	pass # Replace with function body.

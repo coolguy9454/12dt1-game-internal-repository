@@ -8,4 +8,5 @@ func _ready() -> void:
 	
 
 func _process(delta: float) -> void:
+	# Play animation of direction arrow
 	arrow_animation.play("arrow animation")

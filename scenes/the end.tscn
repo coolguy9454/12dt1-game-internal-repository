@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=3 uid="uid://be3uf57c5ysk"]
+
+[ext_resource type="Script" uid="uid://dgedfvnhkns84" path="res://scripts/the_end.gd" id="1_aio05"]
+[ext_resource type="FontFile" uid="uid://rvbi0c82jvgo" path="res://assert/PixelatedEleganceRegular-ovyAA.ttf" id="1_ykik6"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_aio05")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1155.0
+offset_bottom = 652.0
+color = Color(0, 0, 0, 1)
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_left = 295.0
+offset_top = 183.0
+offset_right = 861.0
+offset_bottom = 349.0
+theme_override_fonts/font = ExtResource("1_ykik6")
+theme_override_font_sizes/font_size = 100
+text = "THE END."
+
+[node name="Description" type="Label" parent="."]
+layout_mode = 0
+offset_left = 166.0
+offset_top = 382.0
+offset_right = 968.0
+offset_bottom = 469.0
+theme_override_fonts/font = ExtResource("1_ykik6")
+text = "                                          CONGRATULATION!!
+
+You have won the game and this is the end of it. Thank you for playing! 
+
+                                     You can play again or quit."
+
+[node name="QuitButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 23.0
+offset_top = 598.0
+offset_right = 106.0
+offset_bottom = 631.0
+theme_override_fonts/font = ExtResource("1_ykik6")
+text = "Quit"
+
+[node name="HomeButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1000.0
+offset_top = 583.0
+offset_right = 1124.0
+offset_bottom = 626.0
+theme_override_fonts/font = ExtResource("1_ykik6")
+text = "Back Home"
+
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="HomeButton" to="." method="_on_home_button_pressed"]

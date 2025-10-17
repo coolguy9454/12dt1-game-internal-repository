@@ -26,7 +26,6 @@ func _physics_process(delta: float) -> void:
 	if animatedsprite_2d.get_frame() == 5:
 		collisionshape_2d.scale.x = 1.0
 		collisionshape_2d.scale.y = 1.0
-		print("attacking")
 		
 	elif animatedsprite_2d.get_frame() != 5:
 		collisionshape_2d.scale.x = 0.0

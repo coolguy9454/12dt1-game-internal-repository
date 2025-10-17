@@ -7,6 +7,7 @@ extends StaticBody2D
 @onready var direction_arrow_right = $/root/Game/CanvasLayer/DirectionArrowRight
 @onready var direction_arrow_left = $/root/Game/CanvasLayer/DirectionArrowLeft
 @onready var key_achievement_banner = $/root/Game/CanvasLayer/KeyAchievementBanner
+@onready var end_door = $/root/Game/EndDoor
 @onready var game = $/root/Game
 
 var key_scene = preload("res://scenes/key.tscn")
@@ -29,11 +30,14 @@ func _process(delta):
 			var key = key_scene.instantiate()
 			game.add_child(key)
 			
+			end_door.has_key()
+		
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		label_animation.show()
 		label_animation.play("float")
+		label_animation.z_index = 100
 		
 		near_chest = true
 	
@@ -54,3 +58,5 @@ func _on_within_seen_area_body_entered(body: Node2D) -> void:
 func _on_within_seen_area_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		direction_arrow_right.show()
+		
+	

@@ -1,0 +1,135 @@
+[gd_scene load_steps=26 format=3 uid="uid://ce6ucr07bqibx"]
+
+[ext_resource type="Script" uid="uid://c0o0t8com747i" path="res://scripts/end_door.gd" id="1_kqdgr"]
+[ext_resource type="Texture2D" uid="uid://c0oeincso8n7t" path="res://assert/end game door-01.png" id="1_lj3kl"]
+[ext_resource type="Texture2D" uid="uid://wbbowmekgop1" path="res://assert/end game door-02.png" id="2_kqdgr"]
+[ext_resource type="Texture2D" uid="uid://cyqn4snrnfhfr" path="res://assert/end game door-03.png" id="3_xe81i"]
+[ext_resource type="Texture2D" uid="uid://e2pv3xqnfup6" path="res://assert/end game door-04.png" id="4_np03p"]
+[ext_resource type="Texture2D" uid="uid://bss775vnjmjpp" path="res://assert/end game door-05.png" id="5_i44mg"]
+[ext_resource type="Texture2D" uid="uid://c4scky2cr4an8" path="res://assert/end game door-06.png" id="6_sqp87"]
+[ext_resource type="Texture2D" uid="uid://utcwn8r5vlef" path="res://assert/end game door-07.png" id="7_obae3"]
+[ext_resource type="Texture2D" uid="uid://cj8gr1ig6puxq" path="res://assert/end game door-08.png" id="8_444ue"]
+[ext_resource type="Texture2D" uid="uid://couu8riwvlvop" path="res://assert/end game door-09.png" id="9_gl2aq"]
+[ext_resource type="Texture2D" uid="uid://bved3331rixfm" path="res://assert/end game door-10.png" id="10_c3r4c"]
+[ext_resource type="Texture2D" uid="uid://c1s5p434dbh6u" path="res://assert/end game door-11.png" id="11_k1bw8"]
+[ext_resource type="Texture2D" uid="uid://cjjggoxgjd03h" path="res://assert/end game door-12.png" id="12_3uojh"]
+[ext_resource type="Texture2D" uid="uid://ckqaqob4a20ij" path="res://assert/end game door-13.png" id="13_fg087"]
+[ext_resource type="Texture2D" uid="uid://cddi7lkgon2re" path="res://assert/end game door-14.png" id="14_llj1g"]
+[ext_resource type="Texture2D" uid="uid://5g6vxuk8q6t2" path="res://assert/end game door-15.png" id="15_8erwq"]
+[ext_resource type="Texture2D" uid="uid://b0e2e2iki3thh" path="res://assert/end game door-16.png" id="16_h2rub"]
+[ext_resource type="Texture2D" uid="uid://ciy3gvdampn3d" path="res://assert/end game door-17.png" id="17_71ibs"]
+[ext_resource type="Texture2D" uid="uid://by68co7dygbqs" path="res://assert/speech label 'E'.png" id="19_np03p"]
+[ext_resource type="Texture2D" uid="uid://b0xxw5u1rkcvu" path="res://assert/speech label 'E'-01.png" id="20_i44mg"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xe81i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_np03p"]
+size = Vector2(80, 115)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i44mg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_lj3kl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_kqdgr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_xe81i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_np03p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_i44mg")
+}, {
+"duration": 3.0,
+"texture": ExtResource("6_sqp87")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_obae3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_444ue")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_gl2aq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_c3r4c")
+}, {
+"duration": 3.0,
+"texture": ExtResource("11_k1bw8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_3uojh")
+}, {
+"duration": 6.0,
+"texture": ExtResource("13_fg087")
+}, {
+"duration": 2.0,
+"texture": ExtResource("14_llj1g")
+}, {
+"duration": 2.0,
+"texture": ExtResource("15_8erwq")
+}, {
+"duration": 2.0,
+"texture": ExtResource("16_h2rub")
+}, {
+"duration": 2.0,
+"texture": ExtResource("17_71ibs")
+}],
+"loop": false,
+"name": &"open",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sqp87"]
+size = Vector2(94, 54)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sqp87"]
+animations = [{
+"frames": [{
+"duration": 3.0,
+"texture": ExtResource("19_np03p")
+}, {
+"duration": 3.0,
+"texture": ExtResource("20_i44mg")
+}],
+"loop": true,
+"name": &"float",
+"speed": 5.0
+}]
+
+[node name="EndDoor" type="StaticBody2D"]
+collision_layer = 3
+physics_material_override = SubResource("PhysicsMaterial_xe81i")
+script = ExtResource("1_kqdgr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 3.5)
+shape = SubResource("RectangleShape2D_np03p")
+
+[node name="DoorAnimation" type="AnimatedSprite2D" parent="."]
+position = Vector2(5.96046e-08, 1.19209e-07)
+scale = Vector2(0.1053, 0.1053)
+sprite_frames = SubResource("SpriteFrames_i44mg")
+animation = &"open"
+
+[node name="PlayerSensor" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSensor"]
+position = Vector2(2, 43)
+shape = SubResource("RectangleShape2D_sqp87")
+
+[node name="LabelAnimation" type="AnimatedSprite2D" parent="."]
+position = Vector2(-31, -106)
+scale = Vector2(0.101925, 0.101925)
+sprite_frames = SubResource("SpriteFrames_sqp87")
+animation = &"float"
+frame_progress = 0.833613
+
+[connection signal="animation_finished" from="DoorAnimation" to="." method="_on_door_animation_animation_finished"]
+[connection signal="body_entered" from="PlayerSensor" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="PlayerSensor" to="." method="_on_area_2d_body_exited"]

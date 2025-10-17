@@ -12,16 +12,19 @@ var slime = slime_scene.instantiate()
 
 var button_pressed: String = ""
 
-var all_skills = ["Speed Boost", "Increase Max Health +10", "Shield", "Normal Attack Damage +2", "Normal Attack Speed +2", "Curse Of Bible"]
-# var all_skills = ["Speed Boost", "Curse Of Bible", "Shield"]
+var all_skills = ["Speed Boost", "Increase Max Health +10", "Shield", 
+"All Attack Damage +2", "Normal Attack Speed +2", "Curse Of Bible"]
 
-func get_three_unique_skills():
+
+func get_three_unique_skills(): 
+	# Shuffle the list to random and get the first three options of upgrade to show it in level-up menu
 	var shuffled = all_skills.duplicate()
 	shuffled.shuffle()
 	return shuffled.slice(0, 3)
 
 
 func show_random_skills():
+	# Placing the first three upgrade of the list into the level-up menu
 	var selected_skills = get_three_unique_skills()
 	
 	upgrade_1.text = selected_skills[0]
@@ -50,6 +53,7 @@ func _on_upgrade_3_pressed() -> void:
 	
 
 func level_up():
+	# Take action when a button in level-up menu is pressed
 	if button_pressed == "Speed Boost":
 		player.speed_increase()
 		print(button_pressed)
@@ -62,8 +66,11 @@ func level_up():
 		player.deploy_shield()
 		print(button_pressed)
 		
-	elif button_pressed == "Normal Attack Damage +2":
-		game.increase_ninji_star_damage()
+		all_skills.erase("Shield")
+		print(all_skills)
+		
+	elif button_pressed == "All Attack Damage +2":
+		game.increase_all_damage()
 		print(button_pressed)
 		
 	elif button_pressed == "Normal Attack Speed +2":

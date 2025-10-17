@@ -4,4 +4,5 @@ extends Area2D
 
 
 func _physics_process(delta: float) -> void:
+	# Play animation of direction arrow
 	arrow_animation.play("arrow animation")
