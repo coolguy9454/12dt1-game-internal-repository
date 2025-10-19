@@ -2,7 +2,7 @@ extends Area2D
 
 @onready var player = $/root/Game/Player
 
-const shield_layer = 99
+const SHIELD_LAYER = 99
 
 
 func _physics_process(delta: float) -> void:
@@ -10,4 +10,4 @@ func _physics_process(delta: float) -> void:
 	global_position = player.global_position
 	
 	# Higher layer than enemies, player, bookshalf, desk, and more
-	z_index = shield_layer
+	z_index = SHIELD_LAYER

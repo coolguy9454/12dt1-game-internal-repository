@@ -22,29 +22,29 @@ var enemy_damage: float = 1.0
 
 @export var health_ui: Node
 
-const health_bar_layer = 99
-const player_layer = 98
-const control_up = "up"
-const control_down = "down"
-const control_left = "left"
-const control_right = "right"
-const player_walking_animation = "walk"
-const player_idle_animation = "idle"
-const player_velocity_boundary = 0
-const enemies_group = "enemies"
-const player_min_health = 0
-const dead_screen_scene = "res://scenes/dead screen.tscn"
-const increase_movement_speed = 50
-const increase_max_hp = 10
-const increase_hp = 10
-const ninji_star_cool_down_decrease = 0.1
-const reduce_damage_from_enemies = 0.5
+const HEALTH_BAR_LAYER = 99
+const PLAYER_LAYER = 98
+const CONTROL_UP = "up"
+const CONTROL_DOWN = "down"
+const CONTROL_LEFT = "left"
+const CONTROL_RIGHT = "right"
+const PLAYER_WALKING_ANIMATION = "walk"
+const PLAYER_IDLE_ANIMATION = "idle"
+const PLAYER_VELOCITY_BOUNDARY = 0
+const ENEMIES_GROUP = "enemies"
+const PLAYER_MIN_HEALTH = 0
+const DEAD_SCREEN_SCENE = "res://scenes/dead screen.tscn"
+const INCREASE_MOVEMENT_SPEED = 50
+const INCREASE_MAX_HP = 10
+const INCREASE_HP = 10
+const NINJI_STAR_COOL_DOWN_DECREASE = 0.1
+const REDUCE_DAMAGE_FROM_ENEMIES = 0.5
 
 
 func _ready() -> void:
 	# Set up player's health
-	health_ui.z_index = health_bar_layer
-	player_animation.z_index = player_layer
+	health_ui.z_index = HEALTH_BAR_LAYER
+	player_animation.z_index = PLAYER_LAYER
 	
 
 func _physics_process(delta: float) -> void:
@@ -52,22 +52,22 @@ func _physics_process(delta: float) -> void:
 	shooting_part.look_at(get_global_mouse_position())
 	
 	# Player's movement is controlled by 'w, a, s, d'
-	var v_direction: float = Input.get_axis(control_up, control_down)
-	var h_direction: float = Input.get_axis(control_left, control_right)
+	var v_direction: float = Input.get_axis(CONTROL_UP, CONTROL_DOWN)
+	var h_direction: float = Input.get_axis(CONTROL_LEFT, CONTROL_RIGHT)
 	
 	var direction: Vector2 = Vector2(h_direction, v_direction).normalized()
 	
 	velocity = direction * speed
 	
 	# Animation of the player
-	if velocity.x < player_velocity_boundary:
+	if velocity.x < PLAYER_VELOCITY_BOUNDARY:
 		player_animation.flip_h = true
-		player_animation.play(player_walking_animation)
-	elif velocity.x > player_velocity_boundary:
+		player_animation.play(PLAYER_WALKING_ANIMATION)
+	elif velocity.x > PLAYER_VELOCITY_BOUNDARY:
 		player_animation.flip_h = false
-		player_animation.play(player_walking_animation)
+		player_animation.play(PLAYER_WALKING_ANIMATION)
 	else:
-		player_animation.play(player_idle_animation)
+		player_animation.play(PLAYER_IDLE_ANIMATION)
 	
 	# Ninji star shoot out
 	if can_shoot:
@@ -86,15 +86,15 @@ func _physics_process(delta: float) -> void:
 		var collision = get_slide_collision(colide)
 		
 		# Take away player's health
-		if collision.get_collider().is_in_group(enemies_group):
+		if collision.get_collider().is_in_group(ENEMIES_GROUP):
 			player_health -= enemy_damage
 			health_ui.value = player_health
 			
 			# Detect if player's health is 0
-			if player_health <= player_min_health and not is_reloading:
+			if player_health <= PLAYER_MIN_HEALTH and not is_reloading:
 				is_reloading = true
 				# Navigate end users to dead screen
-				get_tree().change_scene_to_file(dead_screen_scene)
+				get_tree().change_scene_to_file(DEAD_SCREEN_SCENE)
 
 
 func _bullet_cooldown() -> void:
@@ -104,20 +104,20 @@ func _bullet_cooldown() -> void:
 	
 func speed_increase():
 	# Increase player's movement speed
-	speed += increase_movement_speed
+	speed += INCREASE_MOVEMENT_SPEED
 	print(speed)
 	
 	
 func increase_max_health():
 	# Increase player's max health
-	health_ui.max_value += increase_max_hp
-	health_ui.value += increase_hp
+	health_ui.max_value += INCREASE_MAX_HP
+	health_ui.value += INCREASE_HP
 	print(health_ui.max_value)
 	
 	
 func decrease_ninji_star_cooldown():
 	# shoot ninji star faster
-	timer.wait_time -= ninji_star_cool_down_decrease
+	timer.wait_time -= NINJI_STAR_COOL_DOWN_DECREASE
 	print(timer.wait_time)
 	
 	
@@ -125,7 +125,7 @@ func deploy_shield():
 	# Get player a shield
 	var shield = shield_scene.instantiate()
 	game.add_child(shield)
-	enemy_damage -= reduce_damage_from_enemies
+	enemy_damage -= REDUCE_DAMAGE_FROM_ENEMIES
 	
 	
 func deploy_curse_of_bible():

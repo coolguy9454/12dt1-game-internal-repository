@@ -223,10 +223,12 @@ offset_bottom = 51.0
 text = "5"
 
 [node name="DirectionArrowRight" parent="CanvasLayer" instance=ExtResource("10_vtaks")]
-position = Vector2(1111, 328)
+position = Vector2(1106, 328)
+scale = Vector2(1.8, 1.56)
 
 [node name="DirectionArrowLeft" parent="CanvasLayer" instance=ExtResource("6_ir15t")]
-position = Vector2(37, 327)
+position = Vector2(44, 327)
+scale = Vector2(1.88, 1.84608)
 
 [node name="KeyAchievementBanner" parent="CanvasLayer" instance=ExtResource("11_kvpfn")]
 position = Vector2(579, 89)

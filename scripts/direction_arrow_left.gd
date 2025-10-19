@@ -2,7 +2,7 @@ extends Area2D
 
 @onready var arrow_animation = $AnimatedArrow
 
-const arrow_animation_name = "arrow animation"
+const ARROW_ANIMATION_NAME = "arrow animation"
 
 
 func _ready() -> void:
@@ -11,4 +11,4 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	# Play animation of direction arrow
-	arrow_animation.play(arrow_animation_name)
+	arrow_animation.play(ARROW_ANIMATION_NAME)

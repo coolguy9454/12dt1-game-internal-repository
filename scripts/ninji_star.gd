@@ -5,13 +5,13 @@ extends Area2D
 
 var direction: Vector2
 
-const ninji_star_spin_animation = "spin"
-const enemies_group = "enemies"
+const NINJI_STAR_SPIN_ANIMATION = "spin"
+const ENEMIES_GROUP = "enemies"
 
 
 func _physics_process(delta: float) -> void:
 	# Play the animation of ninji star spinning
-	ninji_star_animation.play(ninji_star_spin_animation)
+	ninji_star_animation.play(NINJI_STAR_SPIN_ANIMATION)
 	
 	# Shoot at the direction of where the player is aiming and at a certain speed
 	global_position += direction * int(ninji_star_speed.text)
@@ -19,7 +19,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	# If ninji star hit enemies, ninji star will disappear
-	if body.is_in_group(enemies_group):
+	if body.is_in_group(ENEMIES_GROUP):
 		body.hit()
 		queue_free()
 		

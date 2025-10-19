@@ -39,32 +39,32 @@ const NUMBER_OF_TILES_DESK: int = 24
 const HORIZONTAL_SPACING_DESK: int = 700 
 const X_OFFSET_DESK: int = -7800 
 const Y_OFFSET_DESK: int = 250
-const starting_max_ui_value: int = 8
-const y_axis: int = 0
-const enemies_spawn_prograss_min = 0
-const enemies_spawn_prograss_max = 3446
-const enemies_spawn_range_max_left = 600
-const enemies_spawn_range_min_left = 0
-const enemies_spawn_range_min_right = 1800
-const enemies_spawn_range_max_right = 2400
-const skull_spawn_asension_level = 3
-const gem_exp = 2
-const score_per_gem = 10
-const score_per_hit = 2
-const points_label = "PT: "
-const exp_asension_per_max = 1
-const xp_bar_max_value_multiplier = 8
-const exp_base_line = 0
-const second_ascension = 2
-const fouth_ascension = 4
-const sixth_ascension = 6
-const seventh_ascension = 7
-const second_ascension_spawn_wait_time = 2.5
-const fouth_ascension_spawn_wait_time = 2.0
-const sixth_ascension_spawn_wait_time = 1.0
-const seventh_ascension_spawn_wait_time = 0.5
-const increase_all_attack_damage = 2
-const ninji_star_speed_upgrade = 2
+const STARTING_MAX_UI_VALUE: int = 8
+const Y_AXIS: int = 0
+const ENEMIES_SPAWN_PROGRASS_MIN = 0
+const ENEMIES_SPAWN_PROGRASS_MAX = 3446
+const ENEMIES_SPAWN_RANGE_MAX_LEFT = 600
+const ENEMIES_SPAWN_RANGE_MIN_LEFT = 0
+const ENEMIES_SPAWN_RANGE_MIN_RIGHT = 1800
+const ENEMIES_SPAWN_RANGE_MAX_RIGHT = 2400
+const SKULL_SPAWN_ASENSION_LEVEL = 3
+const GEM_EXP = 2
+const SCORE_PER_GEM = 10
+const SCORE_PER_HIT = 2
+const POINTS_LABEL = "PT: "
+const EXP_ASENSION_PER_MAX = 1
+const XP_BAR_MAX_VALUE_MULTIPLIER = 8
+const EXP_BASE_LINE = 0
+const SECOND_ASCENSION = 2
+const FOUTH_ASCENSION = 4
+const SIXTH_ASCENSION = 6
+const SEVENTH_ASCENSION = 7
+const SECOND_ASCENSION_SPAWN_WAIT_TIME = 2.5
+const FOUTH_ASCENSION_SPAWN_WAIT_TIME = 2.0
+const SIXTH_ASCENSION_SPAWN_WAIT_TIME = 1.0
+const SEVENTH_ASCENSION_SPAWN_WAIT_TIME = 0.5
+const INCREASE_ALL_ATTACK_DAMAGE = 2
+const NINJI_STAR_SPEED_UPGRADE = 2
 
 
 func _ready():
@@ -73,13 +73,13 @@ func _ready():
 	
 	pause_dark_screen.visible = false
 	level_up_menu.visible = false
-	exp_ui.max_value = starting_max_ui_value
+	exp_ui.max_value = STARTING_MAX_UI_VALUE
 	
 	for i in range(NUMBER_OF_TILES_BOOKSHALF):
 		# Set up bookshalfs along the hallway
 		var sprite_instance = sprite_scene.instantiate()
 		sprite_instance.position = Vector2(X_OFFSET_BOOKSHALF + i * HORIZONTAL_SPACING_BOOKSHALF, 
-		y_axis)
+		Y_AXIS)
 		add_child(sprite_instance)
 		
 	for i in range(NUMBER_OF_TILES_DESK):
@@ -100,15 +100,15 @@ func _on_timer_timeout() -> void:
 	
 	while redo:
 		# Get random spawn point and only on left and right side of the hallway
-		enemy_spawn_path.progress = rng.randi_range(enemies_spawn_prograss_min, 
-		enemies_spawn_prograss_max)
+		enemy_spawn_path.progress = rng.randi_range(ENEMIES_SPAWN_PROGRASS_MIN, 
+		ENEMIES_SPAWN_PROGRASS_MAX)
 		
-		if enemy_spawn_path.progress <= enemies_spawn_range_max_left: 
-			if enemy_spawn_path.progress >= enemies_spawn_range_min_left:
+		if enemy_spawn_path.progress <= ENEMIES_SPAWN_RANGE_MAX_LEFT: 
+			if enemy_spawn_path.progress >= ENEMIES_SPAWN_RANGE_MIN_LEFT:
 				redo = false
 		
-		elif enemy_spawn_path.progress >= enemies_spawn_range_min_right:
-			if enemy_spawn_path.progress <= enemies_spawn_range_max_right:
+		elif enemy_spawn_path.progress >= ENEMIES_SPAWN_RANGE_MIN_RIGHT:
+			if enemy_spawn_path.progress <= ENEMIES_SPAWN_RANGE_MAX_RIGHT:
 				redo = false
 	
 	# Spawn enemies
@@ -117,23 +117,22 @@ func _on_timer_timeout() -> void:
 	slime.global_position = enemy_spawn_position.global_position
 	add_child(slime)
 		
-	if exp_ascension >= skull_spawn_asension_level:
+	if exp_ascension >= SKULL_SPAWN_ASENSION_LEVEL:
 		# Skulls only spawn the player levelled up 2 times or more
 		var skull = skull_scene.instantiate()
 		
 		skull.global_position = enemy_spawn_position.global_position
 		add_child(skull)
-		
 
-	
+
 func increase_exp():
 	# Xp bar gain 2 exp per gems that the player has collected
-	exp += gem_exp
+	exp += GEM_EXP
 	exp_ui.value = exp
 	
 	# Points gain 10 per gems that the player has collected
-	score += score_per_gem
-	score_label.text = points_label + str(score)
+	score += SCORE_PER_GEM
+	score_label.text = POINTS_LABEL + str(score)
 	
 	if exp >= exp_ui.max_value:
 		# Game pause as end users is on level- up menu
@@ -144,7 +143,7 @@ func increase_exp():
 		# Player level up when their Xp bar is at max
 		level_up_menu.get_three_unique_skills()
 		level_up_menu.show_random_skills()
-		
+
 
 func finish_level_up():
 	# Game resume after level up
@@ -153,56 +152,56 @@ func finish_level_up():
 	level_up_menu.visible = false
 	
 	# Xp bar value reset back to 0 and max value increase
-	exp_ascension += exp_asension_per_max
-	exp_ui.max_value = exp_ascension * xp_bar_max_value_multiplier
-	exp = exp_base_line
+	exp_ascension += EXP_ASENSION_PER_MAX
+	exp_ui.max_value = exp_ascension * XP_BAR_MAX_VALUE_MULTIPLIER
+	exp = EXP_BASE_LINE
 	exp_ui.value = exp
 	
 	# Different ascension has different enemies spawn time
-	if exp_ascension == second_ascension:
-		timer.wait_time = second_ascension_spawn_wait_time
+	if exp_ascension == SECOND_ASCENSION:
+		timer.wait_time = SECOND_ASCENSION_SPAWN_WAIT_TIME
 		var timer_wait_time = timer.wait_time
 		print(timer_wait_time)
 		
-	if exp_ascension == fouth_ascension:
-		timer.wait_time = fouth_ascension_spawn_wait_time
+	if exp_ascension == FOUTH_ASCENSION:
+		timer.wait_time = FOUTH_ASCENSION_SPAWN_WAIT_TIME
 		var timer_wait_time = timer.wait_time
 		print(timer_wait_time)
 		
-	if exp_ascension == sixth_ascension:
-		timer.wait_time = sixth_ascension_spawn_wait_time 
+	if exp_ascension == SIXTH_ASCENSION:
+		timer.wait_time = SIXTH_ASCENSION_SPAWN_WAIT_TIME 
 		var timer_wait_time = timer.wait_time
 		print(timer_wait_time)
 		
-	if exp_ascension == seventh_ascension:
-		timer.wait_time = seventh_ascension_spawn_wait_time
+	if exp_ascension == SEVENTH_ASCENSION:
+		timer.wait_time = SEVENTH_ASCENSION_SPAWN_WAIT_TIME
 		var timer_wait_time = timer.wait_time
 		print(timer_wait_time)
-		
-		
+
+
 func chest_opened():
 	# Get to fastest spawn rate of enemies when player opened the chest
-	exp_ascension = seventh_ascension
-	timer.wait_time = seventh_ascension_spawn_wait_time
+	exp_ascension = SEVENTH_ASCENSION
+	timer.wait_time = SEVENTH_ASCENSION_SPAWN_WAIT_TIME
 	var timer_wait_time = timer.wait_time
 	print(timer_wait_time)
 
 
 func increase_score_by_hit():
 	# Player hit enemies with their skills gain 2 points
-	score += score_per_hit
-	score_label.text = points_label + str(score)
-	
+	score += SCORE_PER_HIT
+	score_label.text = POINTS_LABEL + str(score)
+
 
 func increase_all_damage():
 	# All Attack upgrade
-	all_damage += increase_all_attack_damage
+	all_damage += INCREASE_ALL_ATTACK_DAMAGE
 	all_damage_ui.text = str(all_damage)
-	
-	
+
+
 func increase_ninji_star_speed():
 	# Increase ninji star speed
-	ninji_star_speed += ninji_star_speed_upgrade
+	ninji_star_speed += NINJI_STAR_SPEED_UPGRADE
 	ninji_star_speed_ui.text = str(ninji_star_speed)
 
 
@@ -230,7 +229,6 @@ func _on_pause_button_pressed() -> void:
 		cross_pillar_1.show()
 		cross_pillar_2.show()
 		music_button.show()
-	
 
 
 func _on_music_button_toggled(toggled_on: bool) -> void:

@@ -14,17 +14,19 @@ var key_scene = preload("res://scenes/key.tscn")
 
 var near_chest: bool = false
 
-const top_layer = 100
-const player = "player"
-const chest_animation_name = "open"
-const label_animation_name = "float"
-const interact_button = "interact"
+const TOP_LAYER = 100
+const PLAYER = "player"
+const CHEST_ANIMATION_NAME = "open"
+const LABEL_ANMATION_NAME = "float"
+const INTERACT_BUTOON = "interact"
 
 
 func _process(delta):
+	# Detect is player near chest
 	if near_chest:
-		if Input.is_action_just_pressed(interact_button):
-			chest_animation.play(chest_animation_name)
+		# Open chest when player pressed'e'
+		if Input.is_action_just_pressed(INTERACT_BUTOON):
+			chest_animation.play(CHEST_ANIMATION_NAME)
 			
 			player_detection.queue_free()
 			within_seen_area.queue_free()
@@ -40,16 +42,18 @@ func _process(delta):
 		
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.is_in_group(player):
+	# Show 'e' label animation
+	if body.is_in_group(PLAYER):
 		label_animation.show()
-		label_animation.play(label_animation_name)
-		label_animation.z_index = top_layer
+		label_animation.play(LABEL_ANMATION_NAME)
+		label_animation.z_index = TOP_LAYER
 		
 		near_chest = true
 	
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
-	if body.is_in_group(player):
+	# Hide 'e' label animation
+	if body.is_in_group(PLAYER):
 		label_animation.hide()
 		label_animation.stop()
 		
@@ -57,12 +61,14 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 		
 
 func _on_within_seen_area_body_entered(body: Node2D) -> void:
-	if body.is_in_group(player):
+	# Hide animaton arrow when chest are beng seen
+	if body.is_in_group(PLAYER):
 		direction_arrow_right.hide()
 
 
 func _on_within_seen_area_body_exited(body: Node2D) -> void:
-	if body.is_in_group(player):
+	# Show animaton arrow when chest are not beng seen
+	if body.is_in_group(PLAYER):
 		direction_arrow_right.show()
 		
 	

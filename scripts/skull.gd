@@ -12,15 +12,15 @@ var blue_gem_scene = preload("res://scenes/blue gems.tscn")
 var enemy_health: int = 15
 var score: int = 0
 const SPEED = 60
-const walk_animation = "walk"
-const flash_animaiton = "Flash"
-const direction_boundary = 0
-const skull_min_health = 0
-const explosion_min_life_time = 0.2
-const explosion_max_life_time = 0.4
-const second_gem_drop_position_x = 20
-const second_gem_drop_position_y = 0
-const second_gem_drop_position = Vector2(20, 0)
+const WALK_ANIMATION = "walk"
+const FLASH_ANIMATION = "Flash"
+const DIRECTION_BOUNDARY = 0
+const SKULL_MIN_HEALTH = 0
+const EXPLOSION_MIN_LIFE_TIME = 0.2
+const EXPLOSION_MAX_LIFE_TIME = 0.4
+const SECOND_GEM_DROP_POSITION_X = 20
+const SECOND_GEM_DROP_POSITION_Y = 0
+const SECOND_GEM_DROP_POSITION = Vector2(20, 0)
 
 
 func _physics_process(delta: float) -> void:
@@ -28,10 +28,10 @@ func _physics_process(delta: float) -> void:
 	velocity = (player.global_position - global_position).normalized() * SPEED
 	
 	# Play aniamtion of skull
-	skull_animation.play(walk_animation)
+	skull_animation.play(WALK_ANIMATION)
 	
 	# Face in a direction towards the player
-	if (player.position.x - position.x) < direction_boundary:
+	if (player.position.x - position.x) < DIRECTION_BOUNDARY:
 		skull_animation.flip_h = true
 	else:
 		skull_animation.flip_h = false
@@ -40,7 +40,7 @@ func _physics_process(delta: float) -> void:
 		
 		
 func hit():
-	flash_animation.play(flash_animaiton)
+	flash_animation.play(FLASH_ANIMATION)
 	
 	# Takes damage from ninji star and curse of bibles
 	enemy_health -= int(all_damage.text)
@@ -49,18 +49,18 @@ func hit():
 	game.increase_score_by_hit()
 	
 	# Skull dies when health hit 0
-	if enemy_health <= skull_min_health:
+	if enemy_health <= SKULL_MIN_HEALTH:
 		var explosion = explosion_scene.instantiate()
 		explosion.global_position = global_position
 		explosion.emitting = true
-		explosion.lifetime = randf_range(explosion_min_life_time, explosion_max_life_time)
+		explosion.lifetime = randf_range(EXPLOSION_MIN_LIFE_TIME, EXPLOSION_MAX_LIFE_TIME)
 		
 		# Drop two gems when the skull enemy is killed
 		var blue_gem = blue_gem_scene.instantiate()
 		blue_gem.global_position = global_position
 		
 		var blue_gem_2 = blue_gem_scene.instantiate()
-		blue_gem_2.global_position = global_position + second_gem_drop_position
+		blue_gem_2.global_position = global_position + SECOND_GEM_DROP_POSITION
 		
 		game.add_child(explosion)
 		game.add_child(blue_gem)

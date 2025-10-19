@@ -5,8 +5,8 @@ extends Control
 @onready var clicktoplay_label = $ClickToPlay
 @onready var play_button = $Play
 
-const game_menu_animation = "door opening"
-const game_scene = "res://scenes/game.tscn"
+const GAME_MENU_ANIMATION = "door opening"
+const GAME_SCENE = "res://scenes/game.tscn"
 
 
 func _on_play_pressed() -> void:
@@ -15,12 +15,12 @@ func _on_play_pressed() -> void:
 	clicktoplay_label.queue_free()
 	play_button.queue_free()
 	
-	animated_game_menu.play(game_menu_animation)
+	animated_game_menu.play(GAME_MENU_ANIMATION)
 
 	
 func _on_animated_sprite_2d_animation_finished() -> void:
 	# Teleport end users to gameplay
-	get_tree().change_scene_to_file(game_scene)
+	get_tree().change_scene_to_file(GAME_SCENE)
 
 
 func _on_quit_pressed() -> void:

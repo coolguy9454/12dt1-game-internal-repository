@@ -15,33 +15,33 @@ var button_pressed: String = ""
 var all_skills = ["Speed Boost", "Increase Max Health +10", "Shield", 
 "All Attack Damage +2", "Normal Attack Speed +2", "Curse Of Bible"]
 
-const min_index_list = 0
-const max_index_list = 3
-const upgrade_1_option = 0
-const upgrade_2_option = 1
-const upgrade_3_option = 2
-const speed_boost_upgrade = "Speed Boost"
-const increase_max_health_10_upgrade = "Increase Max Health +10"
-const shield_upgrade = "Shield"
-const all_attack_damage_2_upgrade = "All Attack Damage +2"
-const normal_attack_speed_2_upgrade = "Normal Attack Speed +2"
-const curse_of_bible_upgrade = "Curse Of Bible"
+const MIN_INDEX_LIST = 0
+const MAX_INDEX_LIST = 3
+const UPGRADE_1_OPTION = 0
+const UPGRADE_2_OPTION = 1
+const UPGRADE_3_OPTION = 2
+const SPEED_BOOST_UPGRADE = "Speed Boost"
+const INCREASE_MAX_HEALTH_10_UPGRADE = "Increase Max Health +10"
+const SHIELD_UPGRADE = "Shield"
+const ALL_ATTACK_DAMAGE_2_UPGRADE = "All Attack Damage +2"
+const NORMAL_ATTACK_SPEED_2_UPGRADE = "Normal Attack Speed +2"
+const CURSE_OF_BIBLE_UPGRADE = "Curse Of Bible"
 
 
 func get_three_unique_skills(): 
 	# Shuffle the list to random and get the first three options of upgrade to show it in level-up menu
 	var shuffled = all_skills.duplicate()
 	shuffled.shuffle()
-	return shuffled.slice(min_index_list, max_index_list)
+	return shuffled.slice(MIN_INDEX_LIST, MAX_INDEX_LIST)
 
 
 func show_random_skills():
 	# Placing the first three upgrade of the list into the level-up menu
 	var selected_skills = get_three_unique_skills()
 	
-	upgrade_1.text = selected_skills[upgrade_1_option]
-	upgrade_2.text = selected_skills[upgrade_2_option]
-	upgrade_3.text = selected_skills[upgrade_3_option]
+	upgrade_1.text = selected_skills[UPGRADE_1_OPTION]
+	upgrade_2.text = selected_skills[UPGRADE_2_OPTION]
+	upgrade_3.text = selected_skills[UPGRADE_3_OPTION]
 	
 
 func _on_upgrade_1_pressed() -> void:
@@ -66,34 +66,33 @@ func _on_upgrade_3_pressed() -> void:
 
 func level_up():
 	# Take action when a button in level-up menu is pressed
-	if button_pressed == speed_boost_upgrade:
+	if button_pressed == SPEED_BOOST_UPGRADE:
 		player.speed_increase()
 		print(button_pressed)
 		
-	elif button_pressed == increase_max_health_10_upgrade:
+	elif button_pressed == INCREASE_MAX_HEALTH_10_UPGRADE:
 		player.increase_max_health()
 		print(button_pressed)
 		
-	elif button_pressed == shield_upgrade:
+	elif button_pressed == SHIELD_UPGRADE:
 		player.deploy_shield()
 		print(button_pressed)
 		
-		all_skills.erase(shield_upgrade)
+		all_skills.erase(SHIELD_UPGRADE)
 		print(all_skills)
 		
-	elif button_pressed == all_attack_damage_2_upgrade:
+	elif button_pressed == ALL_ATTACK_DAMAGE_2_UPGRADE:
 		game.increase_all_damage()
 		print(button_pressed)
 		
-	elif button_pressed == normal_attack_speed_2_upgrade:
+	elif button_pressed == NORMAL_ATTACK_SPEED_2_UPGRADE:
 		player.decrease_ninji_star_cooldown()
 		game.increase_ninji_star_speed()
-		print(button_pressed)	
+		print(button_pressed)   
 		
-	elif button_pressed == curse_of_bible_upgrade:
+	elif button_pressed == CURSE_OF_BIBLE_UPGRADE:
 		player.deploy_curse_of_bible()
 		print(button_pressed)
 		
-		all_skills.erase(curse_of_bible_upgrade)
+		all_skills.erase(CURSE_OF_BIBLE_UPGRADE)
 		print(all_skills)
-	
