@@ -4,6 +4,7 @@ extends StaticBody2D
 @onready var label_animation = $LabelAnimation
 @onready var chest = $/root/Game/Chest
 @onready var door_opened_label = $/root/Game/CanvasLayer/DoorOpened
+@onready var left_direction_arrow = $/root/Game/CanvasLayer/DirectionArrowLeft
 
 var near_by_door: bool = false
 var obtained_key: bool = false
@@ -68,3 +69,15 @@ func has_key():
 
 func _on_door_animation_animation_finished() -> void:
 	door_animation_finished = true
+	
+
+func _on_within_seen_area_body_entered(body: Node2D) -> void:
+	# If player see door, then hide direction arrow
+	if body.is_in_group(PLAYER) and obtained_key:
+		left_direction_arrow.hide()
+
+
+func _on_within_seen_area_body_exited(body: Node2D) -> void:
+	# If player don't see door, then show direction arrow
+	if body.is_in_group(PLAYER) and obtained_key:
+		left_direction_arrow.show()

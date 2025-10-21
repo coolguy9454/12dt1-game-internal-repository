@@ -227,7 +227,7 @@ position = Vector2(1106, 328)
 scale = Vector2(1.8, 1.56)
 
 [node name="DirectionArrowLeft" parent="CanvasLayer" instance=ExtResource("6_ir15t")]
-position = Vector2(44, 327)
+position = Vector2(60, 327)
 scale = Vector2(1.88, 1.84608)
 
 [node name="KeyAchievementBanner" parent="CanvasLayer" instance=ExtResource("11_kvpfn")]
